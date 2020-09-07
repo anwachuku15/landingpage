@@ -1,25 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import Routes from './routes'
+import { Link, useHistory, BrowserRouter as Router} from 'react-router-dom'
+import appTheme from './util/appTheme';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core';
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
+import Navbar from './components/layout/Navbar';
+
+// CONSIDER SEO
 
 function App() {
+
+  const theme = createMuiTheme(appTheme)
+
+  // const history = useHistory()
+  // const [path, setPath] = useState('')
+
+  // window.addEventListener('load', () => {
+  //   if (window.location.pathname === '/contact') {
+  //     setPath(window.location.pathname)
+  //   }
+  // })
+
+  // const checkPath = () => {
+  //   history.listen((location) => {
+  //     setPath(location)
+  //   })
+  // }
+
+  // useEffect(() => {
+  //   checkPath()
+  // }, [])
+
+  // const showContact = path
+  // let _contact
+  // if (showContact !== '/contact') {
+  //   _contact = (<li><Link to='/contact'>Contact Me</Link></li>)
+  // }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MuiThemeProvider theme={theme}>
+      <Router>
+        <Navbar />
+        <div className='container'>
+          <Routes />
+        </div>
+      </Router>
+    </MuiThemeProvider>
   );
 }
 
